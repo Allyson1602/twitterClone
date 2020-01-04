@@ -14,7 +14,7 @@
             $this->$atributo = $valor;
         }
 
-        // cadastrar]
+        // cadastrar
         public function cadastrar(){
             $query = "INSERT INTO usuarios(nome, email, senha)VALUES(:nome, :email, :senha)";
             $stmt = $this->db->prepare($query);
