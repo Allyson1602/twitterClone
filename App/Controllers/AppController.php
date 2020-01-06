@@ -48,6 +48,27 @@
             $this->render('quemSeguir');
         }
 
+        public function acao(){
+            $this->validaAutenticacao();
+
+            $acao = isset($_GET['acao']) ? $_GET['acao'] : '';
+            $id_usuario_seg = isset($_GET['id_usuario']) ? $_GET['id_usuario'] : '';
+
+            $usuarios_seguidores = Container::getModel('Usuarios_seguidores');
+            $usuarios_seguidores->__set('id_usuario', $_SESSION['id']);
+
+            if($_GET['acao'] == 'seguir'){
+                $usuarios_seguidores->seguirUsuario($id_usuario_seg);
+            }else if($_GET['acao'] == 'nao_seguir'){
+                $usuarios_seguidores->deixarSeguirUsuario($id_usuario_seg);
+            }
+
+            // echo '<pre>';
+            // print_r();
+            // echo '</pre>';
+        }
+
+
         public function validaAutenticacao(){
             session_start();
 
