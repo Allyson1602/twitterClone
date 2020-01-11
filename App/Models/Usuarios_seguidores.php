@@ -26,8 +26,16 @@
             return true;
         }
         
+        // deixar de seguir
         public function deixarSeguirUsuario($seguindo){
-            $query = "";
+            $query = "DELETE FROM usuarios_seguidores WHERE id_usuario = :id_usuario AND id_usuario_seguindo = :id_usuario_seguindo";
+            $stmt = $this->db->prepare($query);
+
+            $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+            $stmt->bindVAlue(':id_usuario_seguindo', (int)$seguindo);
+            $stmt->execute();
+
+            return $this;
         }
     }
 
