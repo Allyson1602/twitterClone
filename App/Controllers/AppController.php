@@ -63,6 +63,8 @@
                 $usuarios_seguidores->deixarSeguirUsuario($id_usuario_seg);
             }
 
+            header('location: /quem_seguir');
+
             // echo '<pre>';
             // print_r();
             // echo '</pre>';

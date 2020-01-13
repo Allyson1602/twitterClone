@@ -75,11 +75,18 @@
 
         public function getAll(){
             $query = "SELECT 
-                id, nome, email 
+                u.id, 
+                u.nome, 
+                u.email,
+                (
+                    SELECT count(*)
+                    FROM usuarios_seguidores AS us
+                    WHERE us.id_usuario = :id_usuario AND us.id_usuario_seguindo = u.id
+                ) as seguindo_sn
             FROM 
-                usuarios 
+                usuarios AS u
             WHERE 
-                nome LIKE :nome AND id != :id_usuario";
+                u.nome LIKE :nome AND u.id != :id_usuario";
             $stmt = $this->db->prepare($query);
             $stmt->bindValue(':nome', '%'.$this->__get('nome').'%');
             $stmt->bindValue(':id_usuario', $this->__get('id'));
