@@ -69,7 +69,16 @@
             // print_r();
             // echo '</pre>';
         }
+        
+        public function removerTweet(){
+            $this->validaAutenticacao();
 
+            $tweet = Container::getModel('Tweet');
+            $tweet->__set('id', $_GET['id_tweet']);
+            $tweet->deletarTweet();
+
+            header('location: /timeline');
+        }
 
         public function validaAutenticacao(){
             session_start();
