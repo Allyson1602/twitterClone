@@ -10,10 +10,18 @@
                 $this->validaAutenticacao();
 
                 $tweet = Container::getModel('Tweet');
+                $usuario = Container::getModel('Usuario');
+                $usuarios_seguidores = Container::getModel('Usuarios_seguidores');
 
                 $tweet->__set('id_usuario', $_SESSION['id']);
+                $usuario->__set('id', $_SESSION['id']);
+                $usuarios_seguidores->__set('id_usuario', $_SESSION['id']);
 
                 $this->view->tweets = $tweet->getAll();
+                $this->view->info_usuario = $usuario->getInfoUsuario();
+                $this->view->total_tweets = $tweet->getTotalTweets();
+                $this->view->total_seguindo = $usuarios_seguidores->getTotalSeguindo();
+                $this->view->total_seguidores = $usuarios_seguidores->getTotalSeguidores();
 
                 $this->render('timeline');
         }

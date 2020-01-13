@@ -60,6 +60,15 @@
             return $this;
         }
 
+        public function getTotalTweets(){
+            $query = "SELECT count(*) AS total_tweet FROM tweets WHERE id_usuario = :id_usuario";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+            $stmt->execute();
+
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        }
+
     }
 
 ?>
